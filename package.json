@@ -9,14 +9,21 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "gatsby develop",
+    "start": "tinacms dev -c \"gatsby develop\"",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
   "dependencies": {
     "gatsby": "^5.13.7",
+    "gatsby-plugin-mdx": "^5.13.1",
+    "gatsby-source-filesystem": "^5.13.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tinacms": "^2.2.8"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.6.8",
+    "@types/node": "^22.7.4"
   }
 }
