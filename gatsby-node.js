@@ -22,17 +22,22 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       `);
 
-    console.log(result);
-
-
     result.data.allFile.edges.forEach(({ node }) => {
         const { frontmatter, body } = node.childMdx;
 
         createPage({
-            path: frontmatter.slug, // Set the path to the slug from frontmatter
-            component: require.resolve(`./src/templates/contentTemplate.js`), // Path to your template
+            path: frontmatter.slug,
+            component: require.resolve(`./src/templates/contentTemplate.js`),
             context: {
-                mdx: parseMDX(body, { field: { parser: { type: "markdown" } } }), // Parse MDX for TinaMarkdown
+                mdx: parseMDX(body, { field: { parser: { type: "markdown" } } }),
+                slug: frontmatter.slug,
+                query: `
+                    query($slug: String!) {
+                        mdx(frontmatter: { slug: { eq: $slug } }) {
+                        body
+                        }
+                    }
+                `,
             },
             defer: true,
         });

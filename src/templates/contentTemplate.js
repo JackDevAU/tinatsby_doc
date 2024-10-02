@@ -3,13 +3,15 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { useTina } from 'tinacms/dist/react';
 
 const ContentTemplate = ({ pageContext }) => {
-    const { mdx } = pageContext;
+    const { mdx,slug,query } = pageContext;
 
     const { data } = useTina({
-        query: {},
-        variables: {},
+        query: query,
+        variables: {relativePath:'content/'+slug},
         data: mdx,
       });
+
+      console.log(pageContext);
 
     return (
         <div>
