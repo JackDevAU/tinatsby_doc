@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { useTina } from 'tinacms/dist/react';
 
 const ContentTemplate = ({ pageContext }) => {
-    const { mdx,slug,query } = pageContext;
+    const { query, variables, parsedMdx } = pageContext;
 
     const { data } = useTina({
         query: query,
-        variables: {relativePath:'content/'+slug},
-        data: mdx,
-      });
+        variables: variables,
+        data: parsedMdx,
+    });
 
-      console.log(pageContext);
+    // const refData = useRef(data);
 
     return (
         <div>
             <h1>Markdown test</h1>
-            <TinaMarkdown content={data} />
+            <TinaMarkdown content={parsedMdx} />
         </div>
     );
 };

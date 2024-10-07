@@ -35,8 +35,7 @@ export default defineConfig({
         format:'mdx',
         ui:{
           router: ({ document }) => {
-            console.log(document);
-            return document._sys.filename;
+            return '/'+document._sys.filename;
           },
         },
         fields: [
@@ -45,6 +44,12 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
+            required: true,
+          },
+             {
+            type: "string",
+            name: "slug",
+            label: "Slug",
             required: true,
           },
           {
