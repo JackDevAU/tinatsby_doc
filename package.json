@@ -10,7 +10,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "dev": "tinacms dev -c \"gatsby develop\"",
-    "ld": "tinacms dev --local -c \"gatsby develop\"",
+    "tlb": "tinacms build --local",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
