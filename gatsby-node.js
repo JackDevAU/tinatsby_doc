@@ -47,6 +47,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                     title
                     slug
+                    body
                   }
                 }
                 `,
