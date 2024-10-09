@@ -1,5 +1,8 @@
-const generateQueryForCollection = (collection, relativePath) => {
-    const fields = collection.fields.map(field => field.name).join('\n');
+const generateQueryForCollection = (collection: any, relativePath: any) => {
+    console.log('collection', collection);
+    console.log('relativePath', relativePath);
+
+    const fields = collection.fields.map((field: any) => field.name).join('\n');
     return `
       query {
         ${collection.name}(relativePath: "${relativePath}") {
@@ -16,6 +19,6 @@ const generateQueryForCollection = (collection, relativePath) => {
         }
       }
     `;
-  };
+};
 
-  export default generateQueryForCollection;
+export default generateQueryForCollection;
