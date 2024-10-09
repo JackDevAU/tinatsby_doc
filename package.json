@@ -26,6 +26,5 @@
   "devDependencies": {
     "@tinacms/cli": "^1.6.8",
     "@types/node": "^22.7.4"
-  },
-  "packageManager": "pnpm@9.0.0"
+  }
 }
