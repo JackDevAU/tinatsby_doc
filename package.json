@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "tinacms dev -c \"gatsby develop\"",
+    "dev": "tinacms dev -c \"gatsby develop\"",
+    "ld": "tinacms dev --local -c \"gatsby develop\"",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
@@ -25,5 +26,6 @@
   "devDependencies": {
     "@tinacms/cli": "^1.6.8",
     "@types/node": "^22.7.4"
-  }
+  },
+  "packageManager": "pnpm@9.0.0"
 }

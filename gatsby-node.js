@@ -31,25 +31,40 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         parsedMdx: parseMDX(body, { field: { parser: { type: "markdown" } } }),
         variables: { relativePath: frontmatter.slug+".mdx" },
-        query: `
-                 query ($relativePath: String!) {
-                  post(relativePath: $relativePath) {
-                    ... on Document {
-                      _sys {
-                        filename
-                        basename
-                        breadcrumbs
-                        path
-                        relativePath
-                        extension
-                      }
-                      id
-                    }
-                    title
-                    slug
+        query: ` 
+                query post($relativePath: String!) {
+              post(relativePath: $relativePath) {
+                ... on Document {
+                  _sys {
+                    filename
+                    basename
+                    breadcrumbs
+                    path
+                    relativePath
+                    extension
                   }
+                  id
                 }
-                `,
+                ...PostParts
+              }
+            }
+                
+                fragment PostParts on Post {
+              __typename
+              title
+                ... on Document {
+                  _sys {
+                    filename
+                    basename
+                    breadcrumbs
+                    path
+                    relativePath
+                    extension
+                  }
+                  id
+                }
+              body
+            }`,
       },
       defer: true,
     });
