@@ -31,7 +31,7 @@ export default defineConfig({
                 format: 'mdx',
                 ui: {
                     router: ({ document }) => {
-                        return '/' + document._sys.filename;
+                        return `/${document._sys.template}/${document._sys.filename}`;
                     },
                 },
                 fields: [
@@ -53,6 +53,62 @@ export default defineConfig({
                         name: 'body',
                         label: 'Body',
                         isBody: true,
+                    },
+                ],
+            },
+            {
+                name: 'recipe',
+                label: 'Recipies',
+                path: 'content/recepies',
+                format: 'mdx',
+                ui: {
+                    router: ({ document }) => {
+                        return `/${document._sys.template}/${document._sys.filename}`;
+                    },
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true,
+                    },
+                    {
+                        type: 'string',
+                        name: 'slug',
+                        label: 'Slug',
+                        required: true,
+                    },
+                    {
+                        type: 'string',
+                        name: 'author',
+                        label: 'Author',
+                        required: true,
+                    },
+                    {
+                        type: 'object',
+                        name: 'ingredients',
+                        label: 'Ingredients',
+                        ui: {
+                            itemProps: (item) => {
+                                return {
+                                    label: item.title,
+                                };
+                            },
+                        },
+                        fields: [
+                            {
+                                type: 'string',
+                                label: 'IngredientName',
+                                name: 'ingredientName',
+                            },
+                            {
+                                type: 'string',
+                                label: 'Quantity',
+                                name: 'quantity',
+                            },
+                        ],
                     },
                 ],
             },
