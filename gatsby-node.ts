@@ -33,8 +33,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
             ({ node }: { node: { childMdx: { frontmatter: { slug: string }; body: string } } }) => {
                 const { frontmatter, body } = node.childMdx;
 
-                const relativePath = frontmatter.slug + '.mdx';
-                const query = generateQueryForCollection(collection, relativePath);
+                const query = generateQueryForCollection(collection);
 
                 createPage({
                     path: `${collection.name}/${frontmatter.slug.toLowerCase()}`,
@@ -45,7 +44,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
                             { type: 'rich-text', name: 'markdownParser', parser: { type: 'markdown' } },
                             (s: string) => s
                         ),
-                        variables: { relativePath: frontmatter.slug + '.mdx', slug: frontmatter.slug },
+                        variables: { relativePath: frontmatter.slug + '.mdx'},
                         query: query,
                     },
                     defer: true,
@@ -56,8 +55,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
 };
 
 //Required as per https://tina.io/docs/frameworks/gatsby/#allowing-static-adminindexhtml-file-in-dev-mode
-import { Express } from 'express';
-
 exports.onCreateDevServer = ({ app }: { app: Express }) => {
     app.use('/admin', express.static('public/admin'));
 };

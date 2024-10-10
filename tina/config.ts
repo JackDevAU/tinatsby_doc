@@ -87,6 +87,12 @@ export default defineConfig({
                         required: true,
                     },
                     {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true,
+                    },
+                    {
                         type: 'object',
                         name: 'ingredients',
                         label: 'Ingredients',

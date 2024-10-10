@@ -17,11 +17,11 @@ const ContentTemplate = ({ pageContext }) => {
         <div>
             <h1 data-tina-field={tinaField(data?.post, 'title')}>{data?.post?.title}</h1>
 
-            <div data-tina-field={tinaField(data?.post, 'body')}>
-                <TinaMarkdown content={data?.post?.body} />
-            </div>
-        </div>
-    );
+      <div data-tina-field={tinaField(data?.post, "body")}>
+        <TinaMarkdown content={parsedMdx} />
+      </div>
+    </div>
+  );
 };
 
 export default ContentTemplate;
