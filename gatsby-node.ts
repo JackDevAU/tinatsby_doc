@@ -29,27 +29,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
     const collections = tinaConfig.schema.collections;
 
     collections.forEach((collection) => {
-        console.log('Processing collection:', collection.name);
-
         result.data.allFile.edges.forEach(
             ({ node }: { node: { childMdx: { frontmatter: { slug: string }; body: string } } }) => {
                 const { frontmatter, body } = node.childMdx;
-
-                console.log('Processing file:', frontmatter);
 
                 const relativePath = frontmatter.slug + '.mdx';
                 const query = generateQueryForCollection(collection, relativePath);
 
                 createPage({
                     path: `${collection.name}/${frontmatter.slug.toLowerCase()}`,
-                    component: path.resolve('./src/templates/contentTemplate.js'),
+                    component: path.resolve(`./src/templates/${collection.name}.js`),
                     context: {
                         parsedMdx: parseMDX(
                             body,
                             { type: 'rich-text', name: 'markdownParser', parser: { type: 'markdown' } },
                             (s: string) => s
                         ),
-                        variables: { relativePath: frontmatter.slug + '.mdx' },
+                        variables: { relativePath: frontmatter.slug + '.mdx', slug: frontmatter.slug },
                         query: query,
                     },
                     defer: true,

@@ -58,8 +58,8 @@ export default defineConfig({
             },
             {
                 name: 'recipe',
-                label: 'Recipies',
-                path: 'content/recepies',
+                label: 'Recipes',
+                path: 'content/recipes',
                 format: 'mdx',
                 ui: {
                     router: ({ document }) => {

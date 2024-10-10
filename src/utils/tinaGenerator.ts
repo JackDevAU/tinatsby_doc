@@ -31,9 +31,6 @@ const generateFieldSelection = (field: any) => {
 };
 
 const generateQueryForCollection = (collection: Collection, relativePath: any) => {
-    console.log('collection', collection);
-    console.log('relativePath', relativePath);
-
     if (collection && collection.fields) {
         const fields = collection.fields.map(generateFieldSelection).join('\n');
         return `
