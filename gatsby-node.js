@@ -30,27 +30,30 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve(`./src/templates/contentTemplate.js`),
       context: {
         parsedMdx: parseMDX(body, { field: { parser: { type: "markdown" } } }),
-        variables: { relativePath: frontmatter.slug+".mdx" },
-        query: `
-                 query ($relativePath: String!) {
-                  post(relativePath: $relativePath) {
-                    ... on Document {
-                      _sys {
-                        filename
-                        basename
-                        breadcrumbs
-                        path
-                        relativePath
-                        extension
-                      }
-                      id
-                    }
-                    title
-                    slug
-                    body
-                  }
-                }
-                `,
+        variables: { relativePath: frontmatter.slug + ".mdx" },
+        query: ` 
+          query post($relativePath: String!) {
+            post(relativePath: $relativePath) {
+              ...PostParts
+            }
+          }
+
+          fragment PostParts on Post {
+            __typename
+            title
+            ... on Document {
+              _sys {
+                filename
+                basename
+                breadcrumbs
+                path
+                relativePath
+                extension
+              }
+              id
+            }
+            body
+          }`,
       },
       defer: true,
     });
