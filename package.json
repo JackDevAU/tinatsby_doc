@@ -12,6 +12,7 @@
     "dev": "tinacms dev -c \"gatsby develop\"",
     "tlb": "tinacms build --local",
     "build": "gatsby build",
+    "tina-build-local":"tinacms build --local",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
