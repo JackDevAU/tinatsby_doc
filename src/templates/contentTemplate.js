@@ -1,5 +1,5 @@
 
-import React, { useRef } from "react";
+import React from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { useTina, tinaField, useEditState } from "tinacms/dist/react";
 
