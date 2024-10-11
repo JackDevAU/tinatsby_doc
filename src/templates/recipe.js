@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField, useEditState } from 'tinacms/dist/react';
 
 const Recipe = ({ pageContext }) => {
+    const { edit } = useEditState();
+
     const { query, variables, parsedMdx } = pageContext;
 
     const { data } = useTina({
@@ -13,17 +15,25 @@ const Recipe = ({ pageContext }) => {
         data: parsedMdx,
     });
 
-    return (
-        <div>
-            <h1>Recipe page:</h1>
-            <h2 data-tina-field={tinaField(data?.recipe, 'title')}>{data?.recipe?.title}</h2>
-            <p data-tina-field={tinaField(data?.recipe, 'author')}>Author : {data?.recipe?.author}</p>
+    if (edit) {
+        return (
+            <div>
+                <h1>Recipe page:</h1>
+                <h2 data-tina-field={tinaField(data?.recipe, 'title')}>{data?.recipe?.title}</h2>
 
-            <div data-tina-field={tinaField(data?.recipe, 'body')}>
-                <TinaMarkdown content={data?.recipe?.body} />
+                <div data-tina-field={tinaField(data?.recipe, 'body')}>
+                    <TinaMarkdown content={data?.recipe?.body} />
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div>
+                <h1>Recipe page:</h1>
+                <TinaMarkdown content={data} />
+            </div>
+        );
+    }
 };
 
 export default Recipe;
